@@ -1,5 +1,7 @@
 # Profitlo: AI-based small-business profit planner
 
+**Live app: https://notoriouskapil.github.io/profitlo/**
+
 **B.Tech FLB Project.** Profitlo helps someone planning a small business estimate:
 
 - how much money they need to start (one-time startup investment)

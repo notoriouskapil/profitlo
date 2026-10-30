@@ -4,7 +4,15 @@ Profitlo is a website that runs in your browser. You don't need to install anyth
 
 ---
 
-## Option 1: Download and double-click (easiest)
+## Use it online (no download)
+
+Open **https://notoriouskapil.github.io/profitlo/** in any browser, on your phone or laptop.
+
+To have your own copy, or to use it offline, follow one of the options below.
+
+---
+
+## Option 1: Download and double-click
 
 1. Open the project page: **https://github.com/notoriouskapil/profitlo**
 2. Click the green **Code** button, then **Download ZIP**.
