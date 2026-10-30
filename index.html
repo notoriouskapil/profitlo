@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Profitlo — Business Profit Planner</title>
+  <meta name="description" content="Profitlo estimates your startup investment, cost per product, selling price, monthly profit or loss and break-even point — with AI-style insights. Runs fully in your browser." />
+  <meta name="theme-color" content="#0b2545" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230b2545'/%3E%3Cpath d='M8 22l6-6 4 4 6-8' stroke='%23e2b54a' stroke-width='3' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <!-- Icon sprite (stroke icons, referenced with <use href="#i-name">) -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+      <symbol id="i-home" viewBox="0 0 24 24"><path d="M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></symbol>
+      <symbol id="i-plan" viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 7h8M8 11h8M8 15h5"/></symbol>
+      <symbol id="i-chart" viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></symbol>
+      <symbol id="i-compare" viewBox="0 0 24 24"><path d="M4 7h11M4 7l3-3M4 7l3 3M20 17H9m11 0-3-3m3 3-3 3"/></symbol>
+      <symbol id="i-spark" viewBox="0 0 24 24"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8zM19 16l.8 2.2L22 19l-2.2.8L19 22l-.8-2.2L16 19l2.2-.8z"/></symbol>
+      <symbol id="i-book" viewBox="0 0 24 24"><path d="M4 5a2 2 0 0 1 2-2h14v15H6a2 2 0 0 0-2 2zM4 20a2 2 0 0 0 2 2h14v-4"/></symbol>
+      <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></symbol>
+      <symbol id="i-moon" viewBox="0 0 24 24"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></symbol>
+      <symbol id="i-check" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="m8 12.5 2.5 2.5L16 9.5"/></symbol>
+      <symbol id="i-alert" viewBox="0 0 24 24"><path d="M12 3 2 20h20zM12 10v4M12 17.5v.01"/></symbol>
+      <symbol id="i-x" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="m9 9 6 6M15 9l-6 6"/></symbol>
+      <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5v.01"/></symbol>
+      <symbol id="i-bulb" viewBox="0 0 24 24"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.5 10.9c.6.5 1 1.2 1 2V16h5v-.1c0-.8.4-1.5 1-2A6 6 0 0 0 12 3z"/></symbol>
+      <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+      <symbol id="i-back" viewBox="0 0 24 24"><path d="M19 12H5M11 6l-6 6 6 6"/></symbol>
+      <symbol id="i-reset" viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 3-6.7L3 8M3 3v5h5"/></symbol>
+      <symbol id="i-print" viewBox="0 0 24 24"><path d="M6 9V3h12v6M6 18H4a1 1 0 0 1-1-1v-6a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v6a1 1 0 0 1-1 1h-2M6 14h12v7H6z"/></symbol>
+      <symbol id="i-building" viewBox="0 0 24 24"><path d="M4 21V5l8-3 8 3v16M2 21h20M9 9h1M14 9h1M9 13h1M14 13h1M10 21v-4h4v4"/></symbol>
+      <symbol id="i-box" viewBox="0 0 24 24"><path d="M21 8 12 3 3 8v8l9 5 9-5zM3 8l9 5 9-5M12 13v8"/></symbol>
+      <symbol id="i-calendar" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M3 10h18M8 2v4M16 2v4"/></symbol>
+      <symbol id="i-tag" viewBox="0 0 24 24"><path d="M3 12V4a1 1 0 0 1 1-1h8l9 9-9 9zM7.5 7.5v.01"/></symbol>
+      <symbol id="i-trash" viewBox="0 0 24 24"><path d="M4 7h16M10 11v6M14 11v6M6 7l1 13h10l1-13M9 7V4h6v3"/></symbol>
+      <symbol id="i-save" viewBox="0 0 24 24"><path d="M5 3h11l3 3v15H5zM8 3v5h7M8 21v-7h8v7"/></symbol>
+      <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3 4 6v6c0 5 3.4 8.3 8 9 4.6-.7 8-4 8-9V6z"/><path d="m9 12 2 2 4-4"/></symbol>
+      <symbol id="i-coins" viewBox="0 0 24 24"><ellipse cx="9" cy="6" rx="6" ry="3"/><path d="M3 6v4c0 1.7 2.7 3 6 3s6-1.3 6-3V6M3 10v4c0 1.7 2.7 3 6 3 1 0 2-.1 2.8-.4"/><ellipse cx="16" cy="15" rx="5" ry="2.5"/><path d="M11 15v3.5c0 1.4 2.2 2.5 5 2.5s5-1.1 5-2.5V15"/></symbol>
+      <symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/></symbol>
+    </defs>
+  </svg>
+
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="#home" aria-label="Profitlo home">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 32 32"><rect width="32" height="32" rx="9"/><path d="M8 22l6-6 4 4 6-8"/><circle cx="24" cy="12" r="1.8"/></svg>
+        </span>
+        <span class="brand-text">Profit<span>lo</span></span>
+      </a>
+
+      <!-- Main navigation: one ARIA tablist (top bar on desktop, bottom bar on mobile) -->
+      <nav class="tabs" aria-label="Main sections">
+        <div role="tablist" aria-label="Profitlo sections" id="tablist">
+          <button role="tab" id="tab-home" aria-controls="view-home" data-view="home"><svg class="ic"><use href="#i-home"/></svg><span>Home</span></button>
+          <button role="tab" id="tab-planner" aria-controls="view-planner" data-view="planner"><svg class="ic"><use href="#i-plan"/></svg><span>Planner</span></button>
+          <button role="tab" id="tab-dashboard" aria-controls="view-dashboard" data-view="dashboard"><svg class="ic"><use href="#i-chart"/></svg><span>Dashboard</span></button>
+          <button role="tab" id="tab-scenarios" aria-controls="view-scenarios" data-view="scenarios"><svg class="ic"><use href="#i-compare"/></svg><span>Scenarios</span></button>
+          <button role="tab" id="tab-insights" aria-controls="view-insights" data-view="insights"><svg class="ic"><use href="#i-spark"/></svg><span class="t-long">AI Insights</span><span class="t-short">Insights</span></button>
+          <button role="tab" id="tab-method" aria-controls="view-method" data-view="method"><svg class="ic"><use href="#i-book"/></svg><span class="t-long">How it works</span><span class="t-short">Method</span></button>
+        </div>
+      </nav>
+
+      <button class="icon-btn" id="themeToggle" type="button" aria-label="Switch to dark theme">
+        <svg class="ic ic-moon"><use href="#i-moon"/></svg><svg class="ic ic-sun"><use href="#i-sun"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <main id="main" tabindex="-1">
+
+    <!-- ============================== HOME ============================== -->
+    <section class="view" id="view-home" role="tabpanel" aria-labelledby="tab-home" tabindex="-1">
+      <div class="hero">
+        <div class="hero-inner wrap">
+          <div class="hero-copy">
+            <p class="eyebrow"><span class="dot-live"></span> B.Tech FLB Project · AI-based business planner</p>
+            <h1>Know your numbers <em>before</em> you invest.</h1>
+            <p class="lead">Profitlo helps you plan a small business: how much money you need to start, what each product really costs, the right selling price, and whether you are likely to make a profit or a loss.</p>
+            <div class="hero-cta">
+              <a class="btn btn-gold btn-lg" href="#planner">Start planning <svg class="ic"><use href="#i-arrow"/></svg></a>
+              <button class="btn btn-ghost-light btn-lg" type="button" data-load-sample="candles">Load sample business</button>
+            </div>
+            <ul class="trust">
+              <li><svg class="ic"><use href="#i-shield"/></svg> Data stays on your device</li>
+              <li><svg class="ic"><use href="#i-check"/></svg> No sign-up, no API keys</li>
+              <li><svg class="ic"><use href="#i-coins"/></svg> ₹ INR by default</li>
+            </ul>
+          </div>
+
+          <!-- "Bank card" style preview, filled live from the sample business -->
+          <div class="hero-visual" aria-label="Example result for a sample candle business">
+            <div class="statement-card">
+              <div class="sc-top">
+                <span class="sc-chip" aria-hidden="true"></span>
+                <span class="sc-label">PROFITLO · PLAN SUMMARY</span>
+              </div>
+              <p class="sc-biz" id="heroBiz">Aroma Candle Co.</p>
+              <p class="sc-k">Est. monthly profit</p>
+              <p class="sc-big" id="heroProfit">—</p>
+              <div class="sc-row">
+                <div><p class="sc-k">Startup investment</p><p class="sc-v" id="heroInvest">—</p></div>
+                <div><p class="sc-k">Margin</p><p class="sc-v" id="heroMargin">—</p></div>
+              </div>
+              <svg class="sc-spark" viewBox="0 0 200 40" aria-hidden="true"><path d="M0 34 L25 30 L50 32 L75 22 L100 24 L125 15 L150 17 L175 8 L200 5" /></svg>
+            </div>
+            <div class="float-tile ft-1"><svg class="ic"><use href="#i-target"/></svg><div><p>Break-even</p><strong id="heroBE">—</strong></div></div>
+            <div class="float-tile ft-2"><svg class="ic"><use href="#i-spark"/></svg><div><p>Health score</p><strong id="heroScore">—</strong></div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="wrap section">
+        <h2 class="section-title">Four steps to a clear answer</h2>
+        <p class="section-sub">Fill in what you know — Profitlo handles the maths and explains every figure.</p>
+        <ol class="steps-grid">
+          <li class="step-card"><span class="step-no">01</span><svg class="ic ic-lg"><use href="#i-building"/></svg><h3>Business setup</h3><p>One-time costs to start: equipment, registration, setup and launch marketing.</p></li>
+          <li class="step-card"><span class="step-no">02</span><svg class="ic ic-lg"><use href="#i-box"/></svg><h3>Product costs</h3><p>What one unit costs to make and deliver: materials, packaging, labour, shipping.</p></li>
+          <li class="step-card"><span class="step-no">03</span><svg class="ic ic-lg"><use href="#i-calendar"/></svg><h3>Monthly expenses</h3><p>Bills you pay every month no matter how much you sell: rent, salaries, utilities.</p></li>
+          <li class="step-card"><span class="step-no">04</span><svg class="ic ic-lg"><use href="#i-tag"/></svg><h3>Sales &amp; pricing</h3><p>Your price, expected sales, platform fees and tax — then see profit or loss.</p></li>
+        </ol>
+
+        <div class="feature-band">
+          <div class="feature"><svg class="ic"><use href="#i-chart"/></svg><div><h3>Live dashboard</h3><p>Investment, revenue, costs, profit, margin and break-even at a glance, with charts.</p></div></div>
+          <div class="feature"><svg class="ic"><use href="#i-compare"/></svg><div><h3>What-if scenarios</h3><p>Slide price and sales to compare best, base and worst cases instantly.</p></div></div>
+          <div class="feature"><svg class="ic"><use href="#i-spark"/></svg><div><h3>AI insights</h3><p>A health score and plain-English advice on pricing, costs and risk.</p></div></div>
+          <div class="feature"><svg class="ic"><use href="#i-book"/></svg><div><h3>Transparent maths</h3><p>Every formula shown with your own numbers plugged in. No black box.</p></div></div>
+        </div>
+
+        <div class="sample-strip">
+          <div>
+            <h3>Try a ready-made example</h3>
+            <p>Perfect for a quick demo — each one shows a different outcome.</p>
+          </div>
+          <div class="sample-buttons" id="homeSamples"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================== PLANNER ============================== -->
+    <section class="view" id="view-planner" role="tabpanel" aria-labelledby="tab-planner" tabindex="-1" hidden>
+      <div class="wrap page">
+        <header class="page-head">
+          <div>
+            <p class="eyebrow-dark">Step-by-step planner</p>
+            <h1 class="page-title">Plan your business</h1>
+            <p class="page-sub">Enter what you know. Empty fields count as zero. Fields marked <span class="req">*</span> are needed for results.</p>
+          </div>
+          <div class="head-actions">
+            <label class="sr-only" for="sampleSelect">Load a sample business</label>
+            <select id="sampleSelect" class="select-sm">
+              <option value="">Load sample business…</option>
+            </select>
+          </div>
+        </header>
+
+        <div id="formAlert" class="alert alert-bad" role="alert" hidden></div>
+
+        <div class="planner-grid">
+          <form id="planForm" class="planner-form" novalidate autocomplete="off">
+            <ol class="stepper" id="stepper" aria-label="Form sections"></ol>
+            <div id="formSections"><!-- sections rendered by app.js from FORM config --></div>
+
+            <div class="form-nav">
+              <button type="button" class="btn btn-quiet" id="prevStep"><svg class="ic"><use href="#i-back"/></svg> Back</button>
+              <span class="step-count" id="stepCount" aria-live="polite"></span>
+              <button type="button" class="btn btn-primary" id="nextStep">Next <svg class="ic"><use href="#i-arrow"/></svg></button>
+            </div>
+          </form>
+
+          <aside class="live-card" aria-labelledby="liveTitle">
+            <div class="live-head">
+              <h2 id="liveTitle">Live estimate</h2>
+              <span class="pill" id="livePill">Waiting for inputs</span>
+            </div>
+            <p class="live-k">Estimated monthly profit / loss</p>
+            <p class="live-big" id="liveProfit" aria-live="polite">—</p>
+            <dl class="live-list">
+              <div><dt>Startup investment <span class="tag tag-once">one-time</span></dt><dd id="liveInvest">—</dd></div>
+              <div><dt>Variable cost / unit</dt><dd id="liveUnit">—</dd></div>
+              <div><dt>Monthly costs <span class="tag tag-month">monthly</span></dt><dd id="liveCost">—</dd></div>
+              <div><dt>Break-even units / month</dt><dd id="liveBE">—</dd></div>
+              <div><dt>Profit margin</dt><dd id="liveMargin">—</dd></div>
+            </dl>
+            <div class="progress" aria-hidden="true"><span id="liveProgress"></span></div>
+            <p class="live-note" id="liveProgressText">0 of 4 sections started</p>
+            <div class="live-actions">
+              <button type="button" class="btn btn-primary btn-block" id="calcBtn"><svg class="ic"><use href="#i-chart"/></svg> Calculate results</button>
+              <button type="button" class="btn btn-quiet btn-block" id="resetBtn"><svg class="ic"><use href="#i-reset"/></svg> Reset form</button>
+            </div>
+            <p class="disclaimer-sm">Estimates only — real results depend on the market, costs and execution.</p>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================== DASHBOARD ============================== -->
+    <section class="view" id="view-dashboard" role="tabpanel" aria-labelledby="tab-dashboard" tabindex="-1" hidden>
+      <div class="wrap page" id="dashboardRoot"></div>
+    </section>
+
+    <!-- ============================== SCENARIOS ============================== -->
+    <section class="view" id="view-scenarios" role="tabpanel" aria-labelledby="tab-scenarios" tabindex="-1" hidden>
+      <div class="wrap page" id="scenariosRoot"></div>
+    </section>
+
+    <!-- ============================== INSIGHTS ============================== -->
+    <section class="view" id="view-insights" role="tabpanel" aria-labelledby="tab-insights" tabindex="-1" hidden>
+      <div class="wrap page" id="insightsRoot"></div>
+    </section>
+
+    <!-- ============================== METHOD ============================== -->
+    <section class="view" id="view-method" role="tabpanel" aria-labelledby="tab-method" tabindex="-1" hidden>
+      <div class="wrap page" id="methodRoot"></div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap footer-inner">
+      <p><strong>Profitlo</strong> · B.Tech FLB Project — AI-based small-business profit planner.</p>
+      <p class="muted">All figures are estimates from your inputs, not guaranteed results or financial advice.</p>
+    </div>
+  </footer>
+
+  <div class="tooltip" id="tooltip" role="tooltip" hidden></div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="js/calculator.js"></script>
+  <script src="js/samples.js"></script>
+  <script src="js/charts.js"></script>
+  <script src="js/insights.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
